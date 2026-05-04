@@ -33,6 +33,11 @@
 		public $refECF; //RefECF
 	}
 
+	class GCompraGov {
+		public $tpEnteGov; //String
+		public $pRedutor; //String
+	}
+
 	class Ide {
 		public $cUF; //String
 		public $cNF; //String
@@ -61,7 +66,7 @@
 		public $nSiteAutoriz;
 		public $tpFat;
 		public $gFat;
-
+		public $gCompraGov; //GCompraGov
 	}
 
 	class EnderEmit {
@@ -76,6 +81,7 @@
 		public $cPais; //String
 		public $xPais; //String
 		public $fone; //String
+		public $email; //String
 	}
 
 	class Emit {
@@ -103,6 +109,7 @@
 		public $cPais; //String
 		public $xPais; //String
 		public $fone; //String
+		public $email; //String
 	}
 
 	class Dest {
@@ -292,10 +299,10 @@
 		public $arma; //array(Arma)
 		public $comb; //Comb
 		public $nRECOPI; //String
-		public $uMed;
-		public $cClass;
-		public $qFaturada;
-
+		public $uMed; //String
+		public $cClass; //String
+		public $qFaturada; //String
+		public $vItem; //String
 	}
 
 	class ICMS00 {
@@ -441,6 +448,8 @@
 		public $vFCPST; //String
 		public $vICMSDeson; //String
 		public $motDesICMS; //String
+		public $indSN; //String
+		public $cBenef; //String
 	}
 
 	class ICMSPart {
@@ -708,6 +717,53 @@
 		public $indIncentivo; //String
 	}
 
+	// Classes do IBSCBS (Item)
+	class GDevTrib {
+		public $vDevTrib; //String
+	}
+
+	class GIBSUF {
+		public $pIBSUF; //String
+		public $gDevTrib; //GDevTrib
+		public $vIBSUF; //String
+	}
+
+	class GIBSMun {
+		public $pIBSMun; //String
+		public $gDevTrib; //GDevTrib
+		public $vIBSMun; //String
+	}
+
+	class GCBS {
+		public $pCBS; //String
+		public $gDevTrib; //GDevTrib
+		public $vCBS; //String
+	}
+
+	class GTribCompraGov {
+		public $pAliqIBSUF; //String
+		public $vTribIBSUF; //String
+		public $pAliqIBSMun; //String
+		public $vTribIBSMun; //String
+		public $pAliqCBS; //String
+		public $vTribCBS; //String
+	}
+
+	class GIBSCBS {
+		public $vBC; //String
+		public $gIBSUF; //GIBSUF
+		public $gIBSMun; //GIBSMun
+		public $vIBS; //String
+		public $gCBS; //GCBS
+		public $gTribCompraGov; //GTribCompraGov
+	}
+
+	class IBSCBS {
+		public $CST; //String
+		public $cClassTrib; //String
+		public $gIBSCBS; //GIBSCBS
+	}
+
 	class Imposto {
 		public $vTotTrib; //String
 		public $ICMS; //ICMS
@@ -719,11 +775,14 @@
 		public $COFINS; //COFINS
 		public $COFINSST; //COFINSST
 		public $ISSQN; //ISSQN
-		public $icmssn;
+		public $icmssn; //Icmssn
+		public $IBSCBS; //IBSCBS
 	}
+
 	class IPIDevol {
 		public $vIPIDevol; //String or Double(13v2)
 	}
+
 	class ImpostoDevol {
 		public $pDevol; //String
 		public $IPI; //IPIDevol		
@@ -788,10 +847,51 @@
 		public $vRetPrev; //String
 	}
 
+	// Classes do IBSCBSTot (Total)
+	class GIBSUFTot {
+		public $vDif; //String
+		public $vDevTrib; //String
+		public $vIBSUF; //String
+	}
+
+	class GIBSMunTot {
+		public $vDif; //String
+		public $vDevTrib; //String
+		public $vIBSMun; //String
+	}
+
+	class GIBSTot {
+		public $gIBSUF; //GIBSUFTot
+		public $gIBSMun; //GIBSMunTot
+		public $vIBS; //String
+	}
+
+	class GCBSTot {
+		public $vDif; //String
+		public $vDevTrib; //String
+		public $vCBS; //String
+	}
+
+	class IBSCBSTot {
+		public $vBCIBSCBS; //String
+		public $gIBS; //GIBSTot
+		public $gCBS; //GCBSTot
+	}
+
 	class Total {
+		public $vProd; //String
 		public $ICMSTot; //ICMSTot
 		public $ISSQNtot; //ISSQNtot
 		public $retTrib; //RetTrib
+		public $vCOFINS; //String
+		public $vPIS; //String
+		public $vFUNTTEL; //String
+		public $vFUST; //String
+		public $vRetTribTot; //RetTrib
+		public $vDesc; //String
+		public $vOutro; //String
+		public $vNF; //String
+		public $IBSCBSTot; //IBSCBSTot
 	}
 
 	class Transporta {
@@ -958,7 +1058,7 @@
 		public $retirada; //Retirada
 		public $entrega; //Entrega
 		public $autXML; //array(AutXML)
-		public $det; //array(Det)
+		public $det; //array(Det) ou objeto caso tenha apenas 1
 		public $total; //Total
 		public $transp; //Transp
 		public $cobr; //Cobr
@@ -969,7 +1069,7 @@
 		public $compra; //Compra
 		public $cana; //Cana
 		public $infRespTec;
-		public $assinante;
+		public $assinante; //Assinante
 	}
 
 	class NFCom {
@@ -994,6 +1094,8 @@
 		public $nContrato;
 		public $dContratoIni;
 		public $dContratoFim;
+		public $NroTermPrinc; //String
+		public $cUFPrinc; //String
     }
 
     class gFat {
